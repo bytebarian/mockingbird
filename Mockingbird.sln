@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Injection", "Injection\Injection_VS2010.vcxproj", "{C25DEB60-97F0-469F-ADDE-A69F8D96815C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug - X64|Mixed Platforms = Debug - X64|Mixed Platforms
+		Debug - X86|Mixed Platforms = Debug - X86|Mixed Platforms
+		Release - X64|Mixed Platforms = Release - X64|Mixed Platforms
+		Release - X86|Mixed Platforms = Release - X86|Mixed Platforms
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C25DEB60-97F0-469F-ADDE-A69F8D96815C}.Debug - X64|Mixed Platforms.ActiveCfg = Debug - X64|x64
+		{C25DEB60-97F0-469F-ADDE-A69F8D96815C}.Debug - X64|Mixed Platforms.Build.0 = Debug - X64|x64
+		{C25DEB60-97F0-469F-ADDE-A69F8D96815C}.Debug - X86|Mixed Platforms.ActiveCfg = Debug|Win32
+		{C25DEB60-97F0-469F-ADDE-A69F8D96815C}.Debug - X86|Mixed Platforms.Build.0 = Debug|Win32
+		{C25DEB60-97F0-469F-ADDE-A69F8D96815C}.Release - X64|Mixed Platforms.ActiveCfg = Release - X64|x64
+		{C25DEB60-97F0-469F-ADDE-A69F8D96815C}.Release - X64|Mixed Platforms.Build.0 = Release - X64|x64
+		{C25DEB60-97F0-469F-ADDE-A69F8D96815C}.Release - X86|Mixed Platforms.ActiveCfg = Release|Win32
+		{C25DEB60-97F0-469F-ADDE-A69F8D96815C}.Release - X86|Mixed Platforms.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2BC4910B-065D-4033-AA0D-9FCFC947DB61}
+	EndGlobalSection
+EndGlobal
