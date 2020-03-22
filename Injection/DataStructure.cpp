@@ -2,13 +2,6 @@
 #include "DataStructure.h"
 #include "Utility.h"
 
-#include "stdafx.h"
-#include <string>
-#include <iostream>
-#include <fstream>
-
-using namespace std;
-
 DotNetVersion g_tDotNetVersion;
 HMODULE g_hJitModule = NULL;
 HMODULE g_hClrModule = NULL;
@@ -34,34 +27,34 @@ LoadedMethodDescIterator::PFN_Current LoadedMethodDescIterator::s_pfnCurrent = N
 // detect the version of CLR
 BOOL DetermineDotNetVersion(void)
 {
-	WCHAR wszPath[MAX_PATH] = {0};
-	::GetModuleFileNameW( g_hClrModule, wszPath, MAX_PATH);
+	WCHAR wszPath[MAX_PATH] = { 0 };
+	::GetModuleFileNameW(g_hClrModule, wszPath, MAX_PATH);
 	CStringW strPath(wszPath);
 	int nIndex = strPath.ReverseFind('\\');
-	if( nIndex <= 0 )
+	if (nIndex <= 0)
 		return FALSE;
 	nIndex++;
-	CStringW strFilename = strPath.Mid( nIndex, strPath.GetLength() - nIndex);
-	if( strFilename.CompareNoCase(L"mscorwks.dll") == 0 )
+	CStringW strFilename = strPath.Mid(nIndex, strPath.GetLength() - nIndex);
+	if (strFilename.CompareNoCase(L"mscorwks.dll") == 0)
 	{
 		g_tDotNetVersion = DotNetVersion_20;
 		return TRUE;
 	}
 
-	if( strFilename.CompareNoCase(L"clr.dll") == 0 )
+	if (strFilename.CompareNoCase(L"clr.dll") == 0)
 	{
-		VS_FIXEDFILEINFO tVerInfo = {0};
-		if ( CUtility::GetFileVersion( wszPath, &tVerInfo) &&
-			 tVerInfo.dwSignature == 0xfeef04bd)
+		VS_FIXEDFILEINFO tVerInfo = { 0 };
+		if (CUtility::GetFileVersion(wszPath, &tVerInfo) &&
+			tVerInfo.dwSignature == 0xfeef04bd)
 		{
 			int nMajor = HIWORD(tVerInfo.dwFileVersionMS);
 			int nMinor = LOWORD(tVerInfo.dwFileVersionMS);
 			int nBuildMajor = HIWORD(tVerInfo.dwFileVersionLS);
 			int nBuildMinor = LOWORD(tVerInfo.dwFileVersionLS);
 
-			if( nMajor == 4 )
+			if (nMajor == 4)
 			{
-				if(nMinor < 5)
+				if (nMinor < 5)
 					g_tDotNetVersion = DotNetVersion_40;
 				else
 					g_tDotNetVersion = DotNetVersion_45;

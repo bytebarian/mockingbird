@@ -215,18 +215,12 @@ DWORD __stdcall CInjection::Initialize(LPVOID lpParameter )
 	g_hClrModule = GetModuleHandleA("clr.dll");
 	if( !g_hClrModule )
 		g_hClrModule = GetModuleHandleA("mscorwks.dll");
-	if( g_hClrModule == NULL)
+	if( g_hClrModule == NULL || !DetermineDotNetVersion() )
 	{
 		s_nStatus = Status_Error_CLRNotFound;
 		SetEvent( s_hEvent );
 		return FALSE;
-	}
-	if (!DetermineDotNetVersion())
-	{
-		s_nStatus = Status_Error_CanNotDetermineDotNetVersion;
-		SetEvent(s_hEvent);
-		return FALSE;
-	}
+	}	
 
 	// try to quick load the symbol address base on the binary hash
 	if( !CSymbolAddressCache::TryCache() )

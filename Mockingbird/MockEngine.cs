@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace Mockingbird
 {
-    public static class Mockingbird
+    public static class MockEngine
     {
         public enum Status : int
         {
@@ -22,7 +22,6 @@ namespace Mockingbird
             Error_JITNotFound = -5,
             Error_DownloadPDBFailed = -6,
             Error_CLRNotFound = -7,
-            Error_CanNotDetermineDotNetVersion = -8
         }
 
         #region P/Invoke
@@ -58,10 +57,18 @@ namespace Mockingbird
         public static void Initialize()
         {
             InternalInitialize();
+
+            Thread thread = new Thread(WaitForInitialization);
+            thread.Start();
+
+            _mre.WaitOne();
+        }
+
+        private static void WaitForInitialization()
+        {
             var status = WaitForIntializationCompletion();
             var del = new InitializationCompletedDelegate(InitializationCompleted);
             del(status);
-            _mre.WaitOne();
         }
 
         private static void InitializationCompleted(Status status)
