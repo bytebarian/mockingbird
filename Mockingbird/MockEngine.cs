@@ -125,12 +125,27 @@ namespace Mockingbird
         }
 
 
-        public static void Mock(MethodInfo method, Delegate mock)
+        public static void Mock(MethodBase method, Delegate mock)
         {
             UpdateILCodes(method, mock.Method.GetMethodBody().GetILAsByteArray());
         }
 
-        private static void UpdateILCodes(MethodInfo method, byte[] ilCodes)
+        public static void Mock(MethodBase method, MethodBase mock)
+        {
+            UpdateILCodes(method, mock.GetMethodBody().GetILAsByteArray());
+        }
+
+        public static void Mock(MethodBase method, MethodBody mock)
+        {
+            UpdateILCodes(method, mock.GetILAsByteArray());
+        }
+
+        public static void Mock(MethodBase method, byte[] mock)
+        {
+            UpdateILCodes(method, mock);
+        }
+
+        private static void UpdateILCodes(MethodBase method, byte[] ilCodes)
         {
             if (_updateILCodesMethod == null)
                 throw new Exception("Please Initialize() first.");
